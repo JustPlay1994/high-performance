@@ -7,7 +7,7 @@ import com.justplay1994.github.performance.lock.MyLock;
  * Date: 2020/6/28
  * Time: 15:00 - 15:51
  *
- * 交替打印 XYZ n次
+ * 主线程等待所有线程执行完毕后再继续执行
  **/
 public class MultiPrint {
 
