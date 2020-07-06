@@ -12,35 +12,28 @@ package com.justplay1994.github.performance.lock;
  */
 public class MyReentrantReadWriteLock {
 
-	private int readNum;
-	private int writeNum;
-
 	private ReadLock readLock = new ReadLock();
 	private WriteLock writeLock = new WriteLock();
 
 	private MyReentrantLock mutex = new MyReentrantLock();
 
 	public class ReadLock{
-		public synchronized void lock(){
+		public void lock(){
 			mutex.lock();
-			readNum ++;
 		}
 
-		public synchronized void unlock(){
+		public void unlock(){
 			mutex.unlock();
-			readNum --;
 		}
 	}
 
 	public class WriteLock{
 		public void lock(){
 			mutex.lock();
-			writeNum ++;
 		}
 
 		public void unlock(){
 			mutex.unlock();
-			writeNum --;
 		}
 	}
 
