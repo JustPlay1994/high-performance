@@ -21,8 +21,9 @@ public class ReentrantReadWriteLockDemo {
 		public void run(){
 			System.out.println(currentThread().getName()+"-startRead");
 			lock.readLock().lock();
-			System.out.println(currentThread().getName()+"-endRead");
+			doSomeThings();
 			lock.readLock().unlock();
+			System.out.println(currentThread().getName()+"-endRead");
 		}
 	}
 
@@ -33,11 +34,21 @@ public class ReentrantReadWriteLockDemo {
 		public void run(){
 			System.out.println(currentThread().getName()+"-startWrite");
 			lock.writeLock().lock();
-			System.out.println(currentThread().getName()+"-endWrite");
+			doSomeThings();
 			lock.writeLock().unlock();
+			System.out.println(currentThread().getName()+"-endWrite");
 		}
 	}
 
+	private void doSomeThings(){
+		try {
+			System.out.println(Thread.currentThread().getName()+"start do");
+			Thread.sleep(1000);
+			System.out.println(Thread.currentThread().getName()+"end do");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void start(){
 		new ThreadW("W-1").start();

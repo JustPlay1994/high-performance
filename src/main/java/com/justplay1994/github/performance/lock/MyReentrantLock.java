@@ -12,11 +12,9 @@ public class MyReentrantLock {
 	Thread lockedThread;
 
 	public synchronized void lock(){
-		System.out.println(Thread.currentThread().getName()+"start");
 		if (lockedThread == null || lockedThread != Thread.currentThread()) {
 			while (num > 0) {
 				try {
-					System.out.println(Thread.currentThread().getName()+"is waiting");
 					this.wait();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -25,10 +23,11 @@ public class MyReentrantLock {
 		}
 		lockedThread = Thread.currentThread();
 		num++;
-		System.out.println(Thread.currentThread().getName()+"end");
+		System.out.println(Thread.currentThread().getName()+"start");
 	}
 
 	public synchronized void unlock(){
+		System.out.println(Thread.currentThread().getName()+"end");
 		num--;
 		if (num <= 0) {
 			num = 0;
